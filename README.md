@@ -1,59 +1,43 @@
-# Kelola Keuangan Harian Mahasiswa
+# HematDwid - Kelola Keuangan Harian Mahasiswa
 
-Aplikasi PHP native (tanpa framework) untuk mencatat pemasukan dan pengeluaran
-harian, dengan setiap pemasukan otomatis dibagi ke 3 kantong: Kebutuhan Utama,
-Tabungan, dan Bebas Pakai.
+HematDwid adalah aplikasi manajemen keuangan berbasis PHP native yang dirancang untuk membantu mahasiswa mencatat pemasukan dan pengeluaran harian. Setiap pemasukan otomatis dialokasikan ke 3 kantong: **Kebutuhan Utama**, **Tabungan**, dan **Bebas Pakai**.
 
-## Instalasi (XAMPP / Laragon / sejenisnya)
+Aplikasi ini berjalan sebagai **Progressive Web App (PWA)** dengan dukungan mode *offline* serta keamanan berbasis **WebAuthn (Passkey/Biometrik)**.
 
-1. Salin folder ini ke `htdocs/keuangan-mahasiswa` (XAMPP) atau `www/keuangan-mahasiswa` (Laragon).
-2. Buat database dengan menjalankan `sql/database.sql` di phpMyAdmin atau via CLI:
-   ```
-   mysql -u root -p < sql/database.sql
-   ```
-3. Sesuaikan kredensial database di `config/database.php` jika perlu (default: host `localhost`, user `root`, password kosong).
-4. Buka `http://localhost/keuangan-mahasiswa/` di browser.
-5. Klik **Daftar** untuk membuat akun pertama - kategori dasar akan dibuat otomatis dan presentase default diset 55% Kebutuhan Utama / 25% Tabungan / 20% Bebas Pakai.
+---
 
-## Struktur Folder
+## 🌟 Fitur Utama
 
-```
-keuangan-mahasiswa/
-├── assets/
-│   ├── css/style.css
-│   └── js/main.js
-├── config/
-│   └── database.php
-├── includes/
-│   ├── auth.php
-│   ├── functions.php
-│   ├── header.php
-│   └── footer.php
-├── sql/
-│   └── database.sql
-├── index.php
-├── login.php
-├── register.php
-├── logout.php
-├── dashboard.php
-├── pemasukan.php
-├── pengeluaran.php
-├── kategori.php
-└── presentase.php
-```
+- **Alokasi Otomatis:** Pembagian otomatis dari pemasukan ke 3 kantong sesuai rasio (Default: 55% Utama, 25% Tabungan, 20% Bebas Pakai).
+- **Autentikasi Passkey (WebAuthn):** Login dan registrasi menggunakan sidik jari atau biometrik perangkat.
+- **Progressive Web App (PWA):** Dapat diinstal di HP/Desktop, dilengkapi *Service Worker* dan dukungan navigasi *offline*.
+- **Pencatatan & Transfer:** Pencatatan pemasukan, pengeluaran, serta fitur transfer saldo antar-kantong.
+- **Riwayat & Dashboard:** Pemantauan saldo, kategori transaksi, dan riwayat berbasis API internal.
 
-## Alur Pengguna
+---
 
-1. **Daftar / Masuk** → sistem membuat baris pengaturan presentase (55/25/20) dan kategori dasar.
-2. **Kelola Kategori** → tambah kategori pemasukan (mis. Uang Saku) dan pengeluaran (mis. Makan, dengan kantong sumber default).
-3. **Presentase** → sesuaikan pembagian jika perlu, total wajib 100%.
-4. **Pemasukan** → catat pemasukan; sistem otomatis membuat 3 baris alokasi (utama/nabung/bebas) sesuai presentase saat itu.
-5. **Pengeluaran** → catat pengeluaran dan pilih kantong sumber dana (otomatis tersaran dari kategori, bisa diubah).
-6. **Dashboard** → pantau saldo tiap kantong, persentase pemakaian bulan ini, transaksi terbaru, dan sebaran pengeluaran per kategori.
+## 🚀 Petunjuk Instalasi
 
-## Catatan Keamanan
+1. Salin seluruh folder proyek ke direktori web server (`htdocs/hematdwid` untuk XAMPP atau `www/hematdwid` untuk Laragon).
+2. Buat database MySQL baru (misal: `hematdwid`) dan impor skema SQL Anda.
+3. Sesuaikan konfigurasi database pada berkas `config/database.php` (host, nama database, username, dan password).
+4. Buka `http://localhost/hematdwid/` di browser.
 
-- Password di-hash dengan `password_hash()` (bcrypt).
-- Semua form dilindungi CSRF token.
-- Semua query menggunakan prepared statement (PDO).
-- Setiap query transaksi difilter `user_id` agar data antar akun terisolasi.
+---
+
+## 📖 Alur Penggunaan
+
+1. **Daftar / Masuk:** Mendaftar akun baru (rasio awal 55/25/20 dan kategori dasar akan otomatis dibuat).
+2. **Keamanan Passkey:** Tambahkan metode masuk biometrik melalui halaman **Keamanan** (`keamanan.php`).
+3. **Pemasukan:** Catat pemasukan; nominal akan otomatis dipecah ke 3 kantong.
+4. **Pengeluaran & Transfer:** Catat pengeluaran dari kantong yang sesuai atau lakukan pemindahan saldo antar-kantong di halaman **Transfer** (`transfer.php`).
+5. **Dashboard:** Pantau ringkasan saldo dan penggunaan anggaran secara *real-time*.
+
+---
+
+## 🔒 Keamanan
+
+- Password di-hash menggunakan `password_hash()` (bcrypt).
+- Proteksi CSRF token pada seluruh form.
+- Prepared statement (PDO) untuk mencegah SQL Injection.
+- Isolasi data transaksi berdasarkan `user_id` sesi yang aktif.
