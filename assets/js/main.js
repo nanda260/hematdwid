@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
   initDeleteConfirm();
   initCategoryTypeToggle();
   initServiceWorker();
+  initSidebarSwipe();
 });
-
 /* ---------------------------------------------------------
  * Registrasi service worker untuk PWA
  * ------------------------------------------------------- */
@@ -100,10 +100,54 @@ function initSidebarToggle() {
 }
 
 /* ---------------------------------------------------------
+ * Swipe dari tepi kiri layar untuk membuka sidebar (mobile).
+ * Hanya aktif dalam zona tepi layar agar tidak bentrok dengan
+ * scroll horizontal pada tabel riwayat.
+ * ------------------------------------------------------- */
+function initSidebarSwipe() {
+  var sidebar = document.getElementById('sidebar');
+  var toggle = document.getElementById('navToggle');
+  if (!sidebar || !toggle) return;
+
+  var EDGE_ZONE_PX = 24;
+  var SWIPE_THRESHOLD_PX = 60;
+  var MOBILE_BREAKPOINT_PX = 780;
+
+  var startX = 0;
+  var startY = 0;
+  var tracking = false;
+
+  document.addEventListener('touchstart', function (e) {
+    if (window.innerWidth > MOBILE_BREAKPOINT_PX) return;
+    if (sidebar.classList.contains('is-open')) return;
+
+    var touch = e.touches[0];
+    if (touch.clientX > EDGE_ZONE_PX) return;
+
+    startX = touch.clientX;
+    startY = touch.clientY;
+    tracking = true;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function (e) {
+    if (!tracking) return;
+    tracking = false;
+
+    var touch = e.changedTouches[0];
+    var deltaX = touch.clientX - startX;
+    var deltaY = Math.abs(touch.clientY - startY);
+
+    if (deltaX >= SWIPE_THRESHOLD_PX && deltaX > deltaY) {
+      sidebar.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+  }, { passive: true });
+}
+
+/* ---------------------------------------------------------
  * Flash message hilang otomatis setelah beberapa detik
  * ------------------------------------------------------- */
-function initFlashAutoHide() {
-  var flash = document.querySelector('.flash');
+function initFlashAutoHide() {  var flash = document.querySelector('.flash');
   if (!flash) return;
   setTimeout(function () {
     flash.style.display = 'none';
