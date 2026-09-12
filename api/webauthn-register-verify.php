@@ -43,7 +43,7 @@ try {
     $authData = webauthnParseAuthData($attestation['authData']);
 
     if (!$authData['userPresent'] || !$authData['userVerified']) {
-        webauthnFail('Verifikasi sidik jari tidak terdeteksi.');
+        webauthnFail('Verifikasi Biometrik tidak terdeteksi.');
     }
     if (hash('sha256', webauthnRpId(), true) !== $authData['rpIdHash']) {
         webauthnFail('RP ID tidak cocok.');
@@ -64,7 +64,7 @@ try {
         $label
     );
 
-    echo json_encode(['success' => true, 'message' => 'Sidik jari berhasil didaftarkan.']);
+    echo json_encode(['success' => true, 'message' => 'Biometrik berhasil didaftarkan.']);
 } catch (Exception $e) {
     webauthnFail('Gagal memproses: ' . $e->getMessage());
 }

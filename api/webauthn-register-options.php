@@ -37,7 +37,7 @@ echo json_encode([
         ['type' => 'public-key', 'alg' => -7], // ES256
     ],
     'authenticatorSelection' => [
-        'authenticatorAttachment' => 'platform', // paksa sensor bawaan (sidik jari/Face ID)
+        'authenticatorAttachment' => 'platform', // paksa sensor bawaan (Biometrik/Face ID)
         'userVerification'        => 'required',
         'residentKey'             => 'required',
         'requireResidentKey'      => true, // kompatibilitas WebAuthn L1

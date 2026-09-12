@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delet
         $credId = (int)($_POST['credential_id'] ?? 0);
         $stmt = $pdo->prepare('DELETE FROM webauthn_credentials WHERE id = ? AND user_id = ?');
         $stmt->execute([$credId, $userId]);
-        $_SESSION['flash'] = ['type' => 'success', 'message' => 'Sidik jari berhasil dihapus.'];
+        $_SESSION['flash'] = ['type' => 'success', 'message' => 'Biometrik berhasil dihapus.'];
     }
     header('Location: keamanan.php');
     exit;
@@ -31,16 +31,16 @@ require_once __DIR__ . '/includes/header.php';
 <div class="page-head">
   <div>
     <h1>Keamanan</h1>
-    <p>Kelola metode masuk dengan sidik jari untuk akun Anda.</p>
+    <p>Kelola metode masuk dengan Biometrik untuk akun Anda.</p>
   </div>
 </div>
 
 <div class="card">
-  <h2>Login dengan Sidik Jari</h2>
-  <p>Daftarkan sensor sidik jari atau Face ID perangkat ini agar bisa dipakai sebagai opsi masuk tanpa mengetik kata sandi.</p>
+  <h2>Login dengan Biometrik</h2>
+  <p>Daftarkan sensor Biometrik perangkat ini agar bisa dipakai sebagai opsi masuk tanpa mengetik kata sandi.</p>
 
   <button type="button" id="btnRegisterFingerprint" class="btn btn-primary">
-    Daftarkan Sidik Jari
+    Daftarkan Biometrik
   </button>
   <p id="webauthnRegisterStatus" class="field-hint"></p>
 </div>
@@ -49,7 +49,7 @@ require_once __DIR__ . '/includes/header.php';
   <h2>Perangkat Terdaftar</h2>
 
   <?php if (empty($credentials)): ?>
-    <div class="empty-state">Belum ada sidik jari yang didaftarkan.</div>
+    <div class="empty-state">Belum ada Biometrik yang didaftarkan.</div>
   <?php else: ?>
     <div class="category-list">
       <?php foreach ($credentials as $cred): ?>
@@ -60,7 +60,7 @@ require_once __DIR__ . '/includes/header.php';
               Didaftarkan <?= date('d/m/Y H:i', strtotime($cred['created_at'])) ?>
             </span>
           </div>
-          <form method="post" data-confirm="Hapus sidik jari ini?">
+          <form method="post" data-confirm="Hapus Biometrik ini?">
             <input type="hidden" name="csrf_token" value="<?= csrfToken() ?>">
             <input type="hidden" name="action" value="delete_credential">
             <input type="hidden" name="credential_id" value="<?= (int)$cred['id'] ?>">

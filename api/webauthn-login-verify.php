@@ -59,7 +59,7 @@ try {
 
     $flags = ord($authenticatorData[32]);
     if (!($flags & 0x01) || !($flags & 0x04)) {
-        webauthnLoginFail('Verifikasi sidik jari tidak terdeteksi.');
+        webauthnLoginFail('Verifikasi Biometrik tidak terdeteksi.');
     }
 
     $counter = unpack('N', substr($authenticatorData, 33, 4))[1];
@@ -77,7 +77,7 @@ try {
 
     $valid = openssl_verify($signedData, $signature, $publicKey, OPENSSL_ALGO_SHA256);
     if ($valid !== 1) {
-        webauthnLoginFail('Verifikasi sidik jari gagal.');
+        webauthnLoginFail('Verifikasi Biometrik gagal.');
     }
 
     webauthnUpdateSignCount($pdo, (int)$cred['id'], $counter);

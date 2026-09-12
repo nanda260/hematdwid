@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <path d="M9 17.5c-.5 1-1.5 2-2.5 2.5"></path>
             <path d="M12.5 15.5a2.5 2.5 0 0 0 3-3.5"></path>
           </svg>
-          Masuk dengan Sidik Jari
+          Masuk dengan Biometrik
         </button>
         <p id="webauthnLoginStatus" class="field-hint"></p>
       </div>

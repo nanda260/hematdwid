@@ -32,7 +32,7 @@ function initWebauthnRegister() {
 
   btn.addEventListener('click', async function () {
     btn.disabled = true;
-    if (statusEl) statusEl.textContent = 'Menunggu sidik jari...';
+    if (statusEl) statusEl.textContent = 'Menunggu Biometrik...';
 
     try {
       const optionsRes = await fetch('api/webauthn-register-options.php');
@@ -86,7 +86,7 @@ function initWebauthnLogin() {
 
   btn.addEventListener('click', async function () {
     btn.disabled = true;
-    if (statusEl) statusEl.textContent = 'Menunggu sidik jari...';
+    if (statusEl) statusEl.textContent = 'Menunggu Biometrik...';
 
     try {
       const optionsRes = await fetch('api/webauthn-login-options.php', {

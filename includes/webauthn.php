@@ -1,7 +1,7 @@
 <?php
 /**
  * Helper WebAuthn native (tanpa library) — mendukung ES256 (EC P-256),
- * yang merupakan algoritma default pada sensor sidik jari platform
+ * yang merupakan algoritma default pada sensor Biometrik platform
  * (Touch ID, Windows Hello, Android BiometricPrompt).
  */
 
