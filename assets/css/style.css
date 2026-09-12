@@ -898,10 +898,33 @@ td.amount-out {
 /* =========================================================
    FILTER BAR RIWAYAT
    ========================================================= */
+.riwayat-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.riwayat-summary h2 {
+  margin-bottom: 0;
+}
+
+.riwayat-total {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-secondary);
+  white-space: nowrap;
+}
+
+.riwayat-total.is-expense {
+  color: var(--color-danger);
+}
+
 .tx-filter-bar {
   margin-bottom: 18px;
 }
-
 .filter-row {
   display: flex;
   flex-wrap: wrap;

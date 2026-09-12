@@ -170,10 +170,12 @@ require __DIR__ . '/includes/header.php';
   </div>
 
   <div class="card">
-    <h2 style="margin-bottom:16px;">Riwayat Pengeluaran</h2>
+    <div class="riwayat-summary">
+      <h2>Riwayat Pengeluaran</h2>
+      <div class="riwayat-total is-expense" data-riwayat-total>Rp0</div>
+    </div>
 
-    <div class="tx-filter-bar" data-riwayat data-endpoint="api/riwayat-pengeluaran.php">
-  <button type="button" class="btn btn-secondary btn-sm filter-toggle-btn" data-filter-toggle aria-expanded="false">
+    <div class="tx-filter-bar" data-riwayat data-endpoint="api/riwayat-pengeluaran.php">  <button type="button" class="btn btn-secondary btn-sm filter-toggle-btn" data-filter-toggle aria-expanded="false">
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
     Filter
   </button>

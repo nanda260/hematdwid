@@ -42,9 +42,12 @@ if ($search !== '') {
 
 $whereSql = implode(' AND ', $where);
 
+$totalStmt = $pdo->prepare("SELECT COALESCE(SUM(e.amount), 0) AS total FROM expenses e WHERE $whereSql");
+$totalStmt->execute($params);
+$totalAmount = (float) $totalStmt->fetchColumn();
+
 $stmt = $pdo->prepare(
-    "SELECT e.id, e.category_id, e.amount, e.description, e.expense_date, e.bucket, c.name AS category_name
-     FROM expenses e INNER JOIN categories c ON c.id = e.category_id
+    "SELECT e.id, e.category_id, e.amount, e.description, e.expense_date, e.bucket, c.name AS category_name     FROM expenses e INNER JOIN categories c ON c.id = e.category_id
      WHERE $whereSql
      ORDER BY e.expense_date DESC, e.id DESC
      LIMIT " . ($limit + 1) . " OFFSET ?"
@@ -65,4 +68,10 @@ foreach ($rows as $exp) {
     ];
 }
 
-echo json_encode(['success' => true, 'has_more' => $hasMore, 'rows' => $out]);
+echo json_encode([
+    'success' => true,
+    'has_more' => $hasMore,
+    'rows' => $out,
+    'total' => $totalAmount,
+    'total_formatted' => formatRupiah($totalAmount),
+]);

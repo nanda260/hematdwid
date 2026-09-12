@@ -6,11 +6,6 @@
 
 date_default_timezone_set('Asia/Jakarta'); // WIB
 
-// define('DB_HOST', 'sql105.infinityfree.com');
-// define('DB_NAME', 'if0_42877122_hematdwid');
-// define('DB_USER', 'if0_42877122');
-// define('DB_PASS', 'NandaAsekAsek');
-
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'keuangan_mhs');
 define('DB_USER', 'root');

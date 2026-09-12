@@ -16,6 +16,7 @@
     const loadingEl = scope.querySelector('[data-riwayat-loading]');
     const sentinel = scope.querySelector('[data-riwayat-sentinel]');
     const resetBtn = root.querySelector('[data-riwayat-reset]');
+    const totalEl = scope.querySelector('[data-riwayat-total]');
     const filterInputs = root.querySelectorAll('input[name], select[name]');
 
     let offset = 0;
@@ -62,7 +63,12 @@
 
           if (!data.has_more) done = true;
           if (total === 0) emptyState.style.display = 'block';
-        })
+
+          // Total nominal dihitung di server (bukan dijumlah dari baris yang sudah
+          // dimuat), supaya tetap akurat walau data masih dimuat bertahap (lazy load).
+          if (totalEl && data.total_formatted !== undefined) {
+            totalEl.textContent = data.total_formatted;
+          }        })
         .catch(() => {})
         .finally(() => {
           loading = false;
