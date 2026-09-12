@@ -69,8 +69,9 @@ $flash = getFlash();
       <a href="kategori.php" class="<?= ($activePage ?? '') === 'kategori' ? 'is-active' : '' ?>">Kategori</a>
       <a href="presentase.php" class="<?= ($activePage ?? '') === 'presentase' ? 'is-active' : '' ?>">Presentase</a>
       <a href="keamanan.php" class="<?= ($activePage ?? '') === 'keamanan' ? 'is-active' : '' ?>">Keamanan</a>
+      <a href="hapus-data.php" class="<?= ($activePage ?? '') === 'hapus-data' ? 'is-active' : '' ?>">Hapus Data</a>
     </nav>
-
+    
     <div class="sidebar-wallet">
       <p class="wallet-label">Saldo kantong</p>
       <div class="wallet-row">

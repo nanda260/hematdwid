@@ -895,6 +895,68 @@ td.amount-out {
   color: var(--color-danger);
 }
 
+.danger-zone {
+  border-color: var(--color-danger);
+}
+
+.data-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.data-summary-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.data-summary-item strong {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  color: var(--text);
+}
+
+.choice-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.choice-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.choice-item input {
+  width: auto;
+}
+
+.date-range-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 520px) {
+  .data-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .date-range-fields {
+    grid-template-columns: 1fr;
+  }
+}
 /* =========================================================
    FILTER BAR RIWAYAT
    ========================================================= */
